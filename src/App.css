@@ -1,0 +1,27 @@
+
+html, body, #root {
+  font: 0.9rem sans-serif;
+  background: #0a1f44;
+  color: #1e2432;
+  height: 100%;
+  margin: 0;
+}
+
+.main-container {
+  background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) ), url('../public/images/clouds.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.main-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.search-button {
+  border-radius: 10px;
+}
+
