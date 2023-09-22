@@ -1,6 +1,6 @@
 
 html, body, #root {
-  font: 0.9rem sans-serif;
+  font: 0.7rem ;
   background: #0a1f44;
   color: #1e2432;
   height: 100%;
@@ -11,9 +11,6 @@ html, body, #root {
   background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) ), url('../public/images/clouds.jpg');
   background-size: cover;
   background-position: center;
-}
-
-.main-container {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -25,3 +22,45 @@ html, body, #root {
   border-radius: 10px;
 }
 
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.city {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px 8%;
+  border-radius: 20px;
+  background: rgb(237 249 252 / 85%);
+  box-shadow: 5px 5px 5px 0px rgba(15, 15, 15, 0.404);
+
+}
+
+p {
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+}
+
+.city-name {
+  font-size: 1em;
+  cursor: pointer;
+  color: orange;
+}
+
+.city-name:hover {
+  color: rgba(255, 179, 38, 0.904);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+
+@media only screen and (max-width: 600px) {
+  .city {
+      padding: 40px 20%;
+  }
+}
