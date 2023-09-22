@@ -31,15 +31,14 @@ html, body, #root {
   cursor: pointer;
 }
 
-.city {
+.custom-card {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 40px 8%;
+  padding: 40px 10%;
   border-radius: 20px;
   background: rgb(237 249 252 / 85%);
   box-shadow: 5px 5px 5px 0px rgba(15, 15, 15, 0.404);
-
 }
 
 p {
@@ -60,7 +59,7 @@ p {
 
 
 @media only screen and (max-width: 600px) {
-  .city {
+  .custom-card {
       padding: 40px 20%;
   }
 }

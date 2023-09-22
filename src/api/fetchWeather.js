@@ -1,16 +1,16 @@
 import axios from "axios";
-const url = "http://api.openweathermap.org/geo/1.0/direct";
+const url = "http://api.openweathermap.org/data/2.5/forecast";
 const key = process.env.REACT_APP_OPEN_WEATHER_MAP_KEY;
 
-const fetchCity = async (query) => {
+const fetchWeather = async (latitude, longitude) => {
   const { data } = await axios.get(url, {
     params: {
-      q: query,
-      limit: 5,
+      lat: latitude,
+      lon: longitude,
       APPID: key,
     },
   });
   return data;
 };
 
-export default fetchCity;
+export default fetchWeather;
