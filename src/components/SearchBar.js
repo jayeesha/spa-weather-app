@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { Form, InputGroup, Button, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import fetchCity from "../api/fetchCity";
 
 function SearchBar({ setCities, setLoading }) {
   const [query, setQuery] = useState("");
+  const [showNotFound, setShowNotFound] = useState(false);
   const search = async () => {
     setLoading(true);
+    setShowNotFound(false);
     const data = await fetchCity(query);
+    if (data.length === 0) {
+      setShowNotFound(true);
+    }
     setCities(data);
     setQuery("");
     setLoading(false);
@@ -23,7 +28,7 @@ function SearchBar({ setCities, setLoading }) {
     <div className="search-container w-50">
       <InputGroup className="mb-3 ">
         <Form.Control
-          placeholder="Weather in your city"
+          placeholder="Weather in your city e.g London"
           className="rounded-pill m-1"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -33,6 +38,7 @@ function SearchBar({ setCities, setLoading }) {
           <FontAwesomeIcon icon={faSearch} /> Search
         </Button>
       </InputGroup>
+      {showNotFound && <Alert variant="warning">Not found</Alert>}
     </div>
   );
 }

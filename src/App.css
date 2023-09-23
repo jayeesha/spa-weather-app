@@ -53,7 +53,7 @@ p {
 }
 
 .city-name:hover {
-  color: rgba(255, 179, 38, 0.904);
+  color: rgba(87, 154, 255, 0.904);
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -62,7 +62,6 @@ p {
   font-weight: bold;
   color: #1e2432;
   text-align: left;
-  padding-left: 10px;
 }
 
 .city-date {
@@ -106,4 +105,5 @@ p {
   display: flex;
   justify-content: center; 
   align-items: center; 
+  transition: opacity 0.5s ease-in-out;
 }
