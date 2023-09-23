@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Row, Col } from "react-bootstrap";
+import { Modal, Button, Row, Col, Alert } from "react-bootstrap";
 import fetchWeather from "../api/fetchWeather";
 import CenteredSpinner from "./CenteredSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 function WeatherToday({ selectedCity, handleCloseModal }) {
   const [loading, setLoading] = useState(false);
   const [weatherData, setWeatherData] = useState();
+  const [error, catchError] = useState(false);
 
   useEffect(() => {
     fetchWeatherData();
@@ -15,8 +16,13 @@ function WeatherToday({ selectedCity, handleCloseModal }) {
 
   const fetchWeatherData = async () => {
     setLoading(true);
-    const data = await fetchWeather(selectedCity.lat, selectedCity.lon);
-    setWeatherData(data);
+    catchError(false);
+    try {
+      const data = await fetchWeather(selectedCity.lat, selectedCity.lon);
+      setWeatherData(data);
+    } catch (error) {
+      catchError(error);
+    }
     setLoading(false);
   };
 
@@ -72,31 +78,37 @@ function WeatherToday({ selectedCity, handleCloseModal }) {
             <CenteredSpinner />
           ) : (
             <div className="weather-container">
-              <div className="city-date">{localDateAndTime(weatherData?.list[0].dt)}</div>
-              <Row>
-                <Col xs={4} md={4} className="p-1">
-                  <img
-                    className="city-icon"
-                    src={`http://openweathermap.org/img/w/${weatherData?.list[0].weather[0].icon}.png`}
-                    alt={weatherData?.list[0].weather[0].description}
-                  ></img>
-                </Col>
-                <Col xs={6} md={6} className="p-1">
-                  <div className="city-temp">{Math.round(weatherData?.list[0].main.temp)}°C</div>
-                </Col>
-              </Row>
-              <Row className="font-weight-bold">
-                {weatherData?.list[0].weather[0].main}, {weatherData?.list[0].weather[0].description}
-              </Row>
-              <Row>Feels like: {Math.round(weatherData?.list[0].main.feels_like)}°C</Row>
-              <Row>Humidity: {weatherData?.list[0].main.humidity}%</Row>
-              <Row>Visibility: {weatherData?.list[0].visibility / 1000} Km</Row>
-              <Row className="m-3">
-                <Button size="sm" variant="outline-primary" onClick={handleExportClick}>
-                  Export as JSON
-                  <FontAwesomeIcon icon={faDownload} className="pl-2" />
-                </Button>
-              </Row>
+              {error ? (
+                <Alert Variant="error">Something went wrong. Please try again...</Alert>
+              ) : (
+                <>
+                  <div className="city-date">{localDateAndTime(weatherData?.list[0].dt)}</div>
+                  <Row>
+                    <Col xs={4} md={4} className="p-1">
+                      <img
+                        className="city-icon"
+                        src={`http://openweathermap.org/img/w/${weatherData?.list[0].weather[0].icon}.png`}
+                        alt={weatherData?.list[0].weather[0].description}
+                      ></img>
+                    </Col>
+                    <Col xs={6} md={6} className="p-1">
+                      <div className="city-temp">{Math.round(weatherData?.list[0].main.temp)}°C</div>
+                    </Col>
+                  </Row>
+                  <Row className="font-weight-bold">
+                    {weatherData?.list[0].weather[0].main}, {weatherData?.list[0].weather[0].description}
+                  </Row>
+                  <Row>Feels like: {Math.round(weatherData?.list[0].main.feels_like)}°C</Row>
+                  <Row>Humidity: {weatherData?.list[0].main.humidity}%</Row>
+                  <Row>Visibility: {weatherData?.list[0].visibility / 1000} Km</Row>
+                  <Row className="m-3">
+                    <Button size="sm" variant="outline-primary" onClick={handleExportClick}>
+                      Export as JSON
+                      <FontAwesomeIcon icon={faDownload} className="pl-2" />
+                    </Button>
+                  </Row>
+                </>
+              )}
             </div>
           )}
         </Modal.Body>

@@ -7,14 +7,21 @@ import fetchCity from "../api/fetchCity";
 function SearchBar({ setCities, setLoading }) {
   const [query, setQuery] = useState("");
   const [showNotFound, setShowNotFound] = useState(false);
+  const [error, catchError] = useState(false);
+
   const search = async () => {
     setLoading(true);
     setShowNotFound(false);
-    const data = await fetchCity(query);
-    if (data.length === 0) {
-      setShowNotFound(true);
+    catchError(false);
+    try {
+      const data = await fetchCity(query);
+      if (data.length === 0) {
+        setShowNotFound(true);
+      }
+      setCities(data);
+    } catch (error) {
+      catchError(error);
     }
-    setCities(data);
     setQuery("");
     setLoading(false);
   };
@@ -39,6 +46,7 @@ function SearchBar({ setCities, setLoading }) {
         </Button>
       </InputGroup>
       {showNotFound && <Alert variant="warning">Not found</Alert>}
+      {error && <Alert Variant="error">Something went wrong. Please try again...</Alert>}
     </div>
   );
 }
