@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Spinner, Modal, Button, Row, Col } from "react-bootstrap";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 import fetchWeather from "../api/fetchWeather";
+import CenteredSpinner from "./CenteredSpinner";
 
 function WeatherToday({ selectedCity, handleCloseModal }) {
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ function WeatherToday({ selectedCity, handleCloseModal }) {
         </Modal.Header>
         <Modal.Body>
           {loading ? (
-            <Spinner animation="border" variant="primary" />
+            <CenteredSpinner />
           ) : (
             <div className="weather-container">
               <div className="city-date">{localDateAndTime(weatherData?.list[0].dt)}</div>

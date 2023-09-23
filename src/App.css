@@ -101,3 +101,9 @@ p {
   display: flex;
   padding: 16px 0px;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
