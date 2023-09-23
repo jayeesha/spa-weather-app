@@ -7,6 +7,7 @@ const fetchWeather = async (latitude, longitude) => {
     params: {
       lat: latitude,
       lon: longitude,
+      units: "metric",
       APPID: key,
     },
   });
