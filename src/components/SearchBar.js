@@ -32,7 +32,7 @@ function SearchBar({ setCities, setLoading }) {
     }
   };
   return (
-    <div className="search-container w-50">
+    <div className="search-container">
       <InputGroup className="mb-3 ">
         <Form.Control
           placeholder="Weather in your city e.g London"

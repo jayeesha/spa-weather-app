@@ -14,7 +14,7 @@ function MainView() {
       {loading ? (
         <CenteredSpinner />
       ) : (
-        <div className="result-container w-50">
+        <div className="result-container">
           <CityList cities={cities} />
         </div>
       )}

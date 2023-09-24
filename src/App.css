@@ -17,6 +17,9 @@ html, body, #root {
   align-items: center;
   flex-direction: column;
 }
+.search-container {
+  width: 40%;
+}
 
 .search-button {
   border-radius: 10px;
@@ -81,9 +84,19 @@ p {
   flex-direction: column;
 }
 
+.result-container {
+  width: 40%;
+}
+
 @media only screen and (max-width: 600px) {
   .custom-card {
       padding: 40px 20%;
+  }
+  .search-container {
+    width: 90%;
+  }
+  .result-container {
+    width: 90%;
   }
 }
 
